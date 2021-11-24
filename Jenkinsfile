@@ -1,17 +1,19 @@
 pipeline {
-   agent any
+   agent {
+      any
+   }
+
+def file=readFile(modules.txt)
+def modules=file.readLines()
+
 
    stages {
-      stage('Docker Build') {
-         steps {
-            sh(script: 'docker images -a')
-            sh(script: """
-               cd azure-vote/
-               docker images -a
-               docker build -t jenkins-pipeline .
-               docker images -a
-               cd ..
-            """)
+      stage ('Create modules') {
+         for (module in modules) {
+            if (module.startsWith("#")) {
+               continue
+            }
+            
          }
       }
    }
